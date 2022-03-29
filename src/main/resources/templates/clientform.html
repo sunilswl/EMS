@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>e-Bank System | Client Page</title>
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="../../plugins/fontawesome-free/css/all.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet"
+	href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+
+<section th:replace="navbar.html"></section>
+<section th:replace="sidebar.html"></section>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="">
+			<div class="card">
+				<div class="card-header text-center" th:if=${client.id==0}>
+					<a href="/" class="h2"><b>Add Client</b></a>
+				</div>
+				<div class="card-header text-center" th:unless=${client.id==0}>
+					<a href="/" class="h2"><b>Update Client</b></a>
+				</div>
+				<div class="card-body">
+					<form action="/addclient/save" th:object="${client}" method="post" enctype="multipart/form-data">
+						<div class="row mb-2">
+							<div class="col-sm-5 input-group mb-3">
+								<input type="hidden" class="form-control" th:field="*{id}" />
+								<input type="text" class="form-control" name="fname" th:field="*{fname}"
+									placeholder="First Name">
+							</div>
+							<div class="col-sm-5 input-group mb-3">
+								<input type="text" class="form-control" name="lname" th:field="*{lname}"
+									placeholder="Last Name">
+							</div>
+							<div class="col-sm-2 input-group mb-3">
+								<select class="form-control" name="gender" th:field="*{gender}">
+									<option th:value="'ss'" th:text="'Select Gender'">--Select Gender--</option>
+									<option th:value="'Male'" th:text="'Male'">Male</option>
+									<option th:value="'Female'" th:text="'Female'">Female</option>
+									<option th:value="'Others'" th:text="'Others'">Others</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col-sm-3 form-group">
+								<label>Date of Birth</label> <input type="date"
+									class="form-control" name="dob" th:field="*{dob}">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label>Citizenship No</label> <input type="text"
+									class="form-control" name="citizenship" th:field="*{citizenship}"
+									placeholder="Citizenship No">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label>Issue District</label> <input type="text"
+									class="form-control" name="idistrict" th:field="*{idistrict}"
+									placeholder="Issue District">
+							</div>
+							<div class="col-sm-3 form-group">
+								<label>Date of Issue</label> <input type="date"
+									class="form-control" name="doi" th:field="*{doi}">
+							</div>
+						</div>
+						<div class="row mb-2">
+							<div class="col-sm-5 input-group mb-3">
+								<input type="email" class="form-control" name="email" th:field="*{email}"
+									placeholder="Email">
+							</div>
+							<div class="col-sm-3 input-group mb-3">
+								<input type="text" class="form-control" name="contact" th:field="*{contact}"
+									placeholder="Mobile No">
+							</div>
+							<div class="col-sm-4 input-group mb-3">
+								<input type="text" class="form-control" name="fathername" th:field="*{fathername}"
+									placeholder="Father Name">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-sm-3 input-group mb-3">
+								<select class="form-control" name="province" th:field="*{province}">
+									<!-- <option>--Select Province--</option> -->
+									<option value="p1">Province 1</option>
+									<option value="p2">Province 2</option>
+									<option value="p3">Province 3</option>
+									<option value="p4">Province 4</option>
+									<option value="p5">Province 5</option>
+									<option value="p6">Province 6</option>
+									<option value="p7">Province 7</option>
+								</select>
+							</div>
+							<div class="col-sm-3 input-group mb-3">
+								<input type="text" class="form-control" name="district" th:field="*{district}"
+									placeholder="District">
+							</div>
+							<div class="col-sm-3 input-group mb-3">
+								<input type="text" class="form-control" name="city" th:field="*{city}"
+									placeholder="City">
+							</div>
+							<div class="col-sm-3 input-group mb-3">
+								<input type="text" class="form-control" name="ward" th:field="*{ward}"
+									placeholder="Ward No">
+							</div>
+						</div>
+						
+						<div class="row mb-3">
+							<div class="col-sm-4 input-group mb-3">
+								<input type="text" class="form-control" name="acno" th:field="*{acno}"
+									placeholder="Account No">
+							</div>
+							<!-- <div class="col-sm-4 input-group mb-3">
+								<select  class="form-control" name="actype" th:field="*{actype}" required>
+									<option value="">--Select Type--</option>
+									<option th:each="ac:${aclist}" th:text="${ac.actype}"
+										th:value="${ac.id}">Saving</option>
+								</select>
+							</div>
+							<div class="col-sm-4 input-group mb-3">
+								<select  class="form-control" name="subtype" th:field="*{subtype}" required>
+									<option value="">--Select sub type--</option>
+									<option th:each="sac:${saclist}" th:text="${sac.subtype}"
+										th:value="${sac.id}">Saving</option>
+								</select>
+							</div> -->
+						</div>
+						<div class="row mb-3">
+							<div class="col-sm-5">
+								<label for="customFile">Upload Client Photo</label> 
+								<input type="file" name="clientphoto" th:field="*{cphoto}">
+
+							</div>
+							<div class="col-sm-2 input-group mb-3"></div>
+							<div class="col-sm-5">
+								<label for="customFile">Upload Signature</label> 
+								<input type="file" name="signimage" th:field="*{signimg}"/>
+
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<button type="submit" class="btn btn-primary btn-block">Save</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.form-box -->
+			</div>
+			<!-- /.card -->
+		</div>
+		<!-- /.register-box -->
+	</section>
+</div>
+<!-- /.content-wrapper -->
+
+<div th:replace="fragments::footer">Static Footer</div>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+	<!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- bs-custom-file-input -->
+<script
+	src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- Page specific script -->
+
+</body>
+</html>

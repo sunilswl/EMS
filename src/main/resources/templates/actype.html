@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>e-Bank System | A/C Type Page</title>
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="../../plugins/fontawesome-free/css/all.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet"
+	href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+
+<section th:insert="navbar.html"></section>
+<section th:insert="sidebar.html"></section>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="register-box" style="min-height: 512.781px;">
+			<div class="card card-outline card-primary">
+				<div th:if="${subaccount.id== 0}"  class="card-header text-center">
+					<h2>Add A/C Type</h2>
+				</div>
+				<div th:unless="${subaccount.id==0}"  class="card-header text-center">
+					<h2>Update A/C Type</h2>
+				</div>
+				<div class="card-body">
+					<form action="/actype" th:object="${subaccount}" method="post">
+						<input type="hidden" class="form-control" th:field="*{id}" />
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" name="subtype" th:field="*{subtype}"
+								placeholder="Account Sub Type Name">
+						</div>
+						<div class="input-group mb-3">
+							<input type="text" class="form-control" th:field="*{interest}"
+								placeholder="Interest Rate">
+						</div>
+						<div class="input-group mb-3">
+							<select th:field="*{account}" class="form-control" required>
+
+								<option th:each="ac:${aclist}" th:text="${ac.actype}"
+									th:value="${ac.id}">Saving</option>
+							</select>
+						</div>
+						<div class="row">
+							<button type="submit" class="btn btn-primary btn-block">Save</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.form-box -->
+			</div>
+			<!-- /.card -->
+		</div>
+		<!-- /.register-box -->
+	</section>
+</div>
+<!-- /.content-wrapper -->
+
+<div th:replace="fragments::footer">Static Footer</div>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+	<!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+
+</body>
+</html>
